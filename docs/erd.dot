@@ -1,0 +1,16 @@
+digraph ERD {
+    rankdir=LR;
+    graph [bgcolor="white", pad="0.25", nodesep="0.5", ranksep="1.0"];
+    node [shape=record, style="rounded,filled", fillcolor="#F1F7FB", color="#336888", fontname="DejaVu Sans", fontsize=11, margin="0.17"];
+    edge [color="#447A9B", fontname="DejaVu Sans", fontsize=9, arrowsize=0.7];
+    User [label="{User|id: PK\lemail: unique (login)\lfirst_name\llast_name\lis_active / is_staff\lis_superuser\l}"];
+    Category [label="{Category|id: PK\lname: unique\lslug: unique\l}"];
+    Tag [label="{Tag|id: PK\lname: unique\lslug: unique\l}"];
+    Post [label="{Post|id: PK\lauthor_id: FK\lcategory_id: FK (nullable)\ltitle\lslug: unique\lbody\lstatus: draft/published\lcreated_at / updated_at\l}"];
+    Comment [label="{Comment|id: PK\lpost_id: FK\lauthor_id: FK\lbody\lcreated_at\l}"];
+    User -> Post [label="1 to many (author)"];
+    User -> Comment [label="1 to many (author)"];
+    Category -> Post [label="1 to many, optional"];
+    Post -> Comment [label="1 to many"];
+    Post -> Tag [dir=both, label="many to many"];
+}
