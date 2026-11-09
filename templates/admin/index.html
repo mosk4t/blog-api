@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+{% load i18n unfold %}
+
+{% block content %}
+{% component "unfold/components/container.html" %}
+  <h1 class="blog-dashboard-heading">Blog API Overview</h1>
+  <p class="blog-dashboard-subtitle">Content and community at a glance</p>
+
+  <div class="blog-kpi-grid">
+  {% for card in stat_cards %}
+    {% component "unfold/components/card.html" with title=card.label icon=card.icon %}
+      <div class="blog-kpi-number">{{ card.value }}</div>
+    {% endcomponent %}
+  {% endfor %}
+  </div>
+
+  <div class="blog-dashboard-grid">
+    {% component "unfold/components/card.html" with title="Posts per category" %}
+      {% component "unfold/components/chart/bar.html" with data=posts_chart height=310 %}{% endcomponent %}
+    {% endcomponent %}
+
+    {% component "unfold/components/card.html" with title="Publishing progress" %}
+      {% component "unfold/components/progress.html" with title="Published" value=published_pct %}{% endcomponent %}
+      <div class="blog-progress-gap"></div>
+      {% component "unfold/components/progress.html" with title="Drafts" value=draft_pct %}{% endcomponent %}
+    {% endcomponent %}
+  </div>
+
+  {% component "unfold/components/card.html" with title="Top 5 authors" %}
+    {% component "unfold/components/table.html" with table=top_authors card_included=1 striped=1 %}{% endcomponent %}
+  {% endcomponent %}
+{% endcomponent %}
+{% endblock %}
