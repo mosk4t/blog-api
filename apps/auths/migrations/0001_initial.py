@@ -1,7 +1,5 @@
 # Initial database schema for the custom user model.
 from django.db import migrations, models
-import django.utils.timezone
-import django.contrib.auth.models
 
 import apps.auths.managers
 

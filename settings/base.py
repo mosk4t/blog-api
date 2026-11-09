@@ -4,12 +4,16 @@ from datetime import timedelta
 from pathlib import Path
 
 from settings.conf import BLOG_ALLOWED_HOSTS, BLOG_SECRET_KEY
+from settings.unfold import UNFOLD
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = BLOG_SECRET_KEY
 ALLOWED_HOSTS = BLOG_ALLOWED_HOSTS
 
 INSTALLED_APPS = [
+    "unfold",
+    "unfold.contrib.filters",
+    "unfold.contrib.forms",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
